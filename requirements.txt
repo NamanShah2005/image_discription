@@ -1,3 +1,5 @@
 streamlit
 google.generativeai
 google-cloud-aiplatform
+dotenv
+os
