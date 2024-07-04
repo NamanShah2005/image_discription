@@ -2,10 +2,12 @@ from pathlib import Path
 import hashlib
 import google.generativeai as genai
 import streamlit as st
+import dotenv
+import os
 
+dotenv.load_dotenv()
 # Set your API key here
-API_KEY = "AIzaSyBsJVn3VYMKmuHX0bie7Qt_Sfur0JDX_h8"
-
+API_KEY = os.getenv("API_KEY")
 # Configure with your API key
 genai.configure(api_key=API_KEY)
 
