@@ -19,16 +19,36 @@ generation_config = {
   "max_output_tokens": 1024,
 }
 
+css = """
+<style>
+body {
+    background-image: linear-gradient(to left, rgb(10, 0, 73), rgb(0, 0, 0));
+    color: white; /* Text color */
+}
+
+/* Style for file uploader */
+div.stFileUploader {
+    background-color: white; /* White background for file uploader */
+    color: black; /* Text color */
+    border-color: white; /* Border color */
+}
+</style>
+"""
+
+# Display CSS
+st.markdown(css, unsafe_allow_html=True)
+
 st.header("Image Chatbot")
+st.markdown('<div class="header-text">Image Chatbot</div>', unsafe_allow_html=True)
 
 model = genai.GenerativeModel(model_name="gemini-1.5-flash",
                               generation_config=generation_config)
 
 uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
-
 if uploaded_image is not None:
     st.image(uploaded_image, use_column_width=True)
+    # st.markdown('<div class="input-section">Input Section</div>', unsafe_allow_html=True)
     input_text = st.text_input("Enter your query here")
 
     if input_text:
@@ -42,6 +62,7 @@ if uploaded_image is not None:
         
         # Check if the response contains a valid Part
         if response.parts:
+            st.markdown('<div class="output-text">Output Section</div>', unsafe_allow_html=True)
             st.write(response.text)
         else:
             st.write("Sorry, the model could not generate a valid response.")
